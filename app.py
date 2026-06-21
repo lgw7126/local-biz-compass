@@ -10,7 +10,8 @@ from insight import get_insight
 load_dotenv()
 
 STORES_PATH = "mapo_stores.csv"
-API_KEY = os.getenv("WEATHER_API_KEY", "")
+# 로컬: .env / Streamlit Cloud: secrets.toml
+API_KEY = st.secrets.get("WEATHER_API_KEY", "") or os.getenv("WEATHER_API_KEY", "")
 
 st.set_page_config(page_title="동네상권 나침반", page_icon="🧭", layout="wide")
 
