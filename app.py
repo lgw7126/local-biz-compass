@@ -3,7 +3,7 @@ import pandas as pd
 import altair as alt
 import streamlit as st
 from dotenv import load_dotenv
-from stores import load_stores, get_districts, count_stores
+from stores import load_stores, get_districts, count_stores, get_store_list
 from weather import get_tomorrow_forecast, get_weekly_forecast
 from insight import get_insight
 
@@ -47,6 +47,18 @@ col1, col2, col3 = st.columns(3)
 store_count = count_stores(df, district, category)
 with col1:
     st.metric(label=f"{category} 수", value=f"{store_count}개")
+    with st.expander(f"가게 목록 보기 ({store_count}개)"):
+        store_list = get_store_list(df, district, category)
+        if store_list.empty:
+            st.caption("등록된 가게가 없습니다.")
+        else:
+            for _, row in store_list.iterrows():
+                st.markdown(
+                    f"**{row['상호명']}**  \n"
+                    f"<span style='font-size:12px;color:#8892a4'>{row['도로명주소'] if pd.notna(row['도로명주소']) else '주소 미등록'}</span>",
+                    unsafe_allow_html=True,
+                )
+                st.divider()
 
 if weather:
     icon = weather.get("icon", "🌤️")
