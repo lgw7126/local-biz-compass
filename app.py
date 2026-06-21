@@ -27,7 +27,7 @@ with st.sidebar:
     districts = get_districts(df)
     district = st.selectbox("법정동", districts)
     categories = sorted(
-        df[df["법정동명"] == district]["상권업종소분류명"].dropna().unique().tolist()
+        df[(df["법정동명"] == district) & (df["상권업종대분류명"] == "음식")]["상권업종소분류명"].dropna().unique().tolist()
     )
     category = st.selectbox("업종", categories)
 
