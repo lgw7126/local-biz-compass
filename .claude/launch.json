@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "local-biz-compass",
+      "runtimeExecutable": "C:\\Users\\kikin\\.local\\bin\\uv.exe",
+      "runtimeArgs": ["run", "--with", "streamlit", "--with", "pandas", "--with", "requests", "--with", "python-dotenv", "python", "-m", "streamlit", "run", "app.py", "--server.port", "8501", "--server.headless", "true"],
+      "port": 8501
+    },
+    {
+      "name": "cheat-app",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["--yes", "http-server", "-p", "5195", "-c-1"],
+      "port": 5195
+    }
+  ]
+}
